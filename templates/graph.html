@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}图 BFS - AI 可视化算法学习平台{% endblock %}
+
+{% block left_panel %}
+  <div class="card">
+    <h2>图 BFS</h2>
+    <p class="small">该页面包含：理论简介、动画演示、互动微题与 AI 帮助。</p>
+  </div>
+
+  <div class="card visual-box">
+    <div id="visual-area">
+      <p class="small">动画占位 — 请在这里放该算法的可视化 DOM/Canvas</p>
+    </div>
+  </div>
+
+  <div class="card" style="display:flex; gap:10px; flex-wrap:wrap;">
+    <button class="btn" id="play-btn">▶ 开始动画</button>
+    <button class="btn" id="reset-btn">🔄 重置</button>
+    <button class="btn" id="complete-btn">完成并记分</button>
+  </div>
+
+  <div class="card">
+    <h3>微任务</h3>
+    <p class="small">这里放一个小题（例如预测下一步），完成可得积分。</p>
+    <button class="btn" id="placeholder-quiz">我知道了</button>
+    <p id="quiz-result" class="small" style="margin-top:12px"></p>
+  </div>
+{% endblock %}
+
+{% block right_panel %}
+  <h3>🤖 AI 辅助</h3>
+  <div style="display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+    <button class="btn" id="ai-hint-btn">💡 请求提示</button>
+    <button class="btn" id="ai-explain-btn">📘 请求解释</button>
+  </div>
+  <div id="ai-output" style="margin-top:8px">AI 输出将在这里展示</div>
+
+  <hr style="margin:12px 0">
+
+  <div>
+    <div class="small">积分</div>
+    <div style="font-size:20px; margin-top:6px"><span id="score-display">0</span> 分</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="small">进度</div>
+    <div style="margin-top:8px" class="progress"><div class="progress-inner"></div></div>
+    <div id="progress-percent" class="small" style="margin-top:6px">0%</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="small">徽章</div>
+    <div id="badges-list" style="margin-top:8px"></div>
+  </div>
+
+  <div style="margin-top:12px">
+    <button class="btn" onclick="exportLogs()">导出日志</button>
+  </div>
+{% endblock %}
+
+{% block extra_js %}{% endblock %}

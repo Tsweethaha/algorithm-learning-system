@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}队列 - AI 可视化算法学习平台{% endblock %}
+
+{% block left_panel %}
+  <div class="card">
+    <h2>队列（Queue）</h2>
+    <p class="small">演示队列的 Enqueue 和 Dequeue 操作。队列遵循先进先出（FIFO）原则，队头出队，队尾入队。</p>
+  </div>
+
+  <div class="card visual-box" style="min-height:250px; padding:30px; overflow-x:auto;">
+    <div id="operation-hint" style="text-align:center; font-size:16px; font-weight:600; color:#3498db; margin-bottom:20px; min-height:24px;"></div>
+    <div id="queue-container" style="display:flex; flex-direction:column; align-items:center; min-height:200px; position:relative;">
+      <!-- Front 指针 -->
+      <div id="front-pointer-wrapper" style="position:absolute; top:0; left:0; display:none; flex-direction:column; align-items:center; z-index:10; transition: left 0.4s ease;">
+        <div style="font-size:14px; color:#e74c3c; font-weight:600; margin-bottom:4px;">front</div>
+        <div style="width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-top:12px solid #e74c3c;"></div>
+      </div>
+      
+      <!-- Rear 指针 -->
+      <div id="rear-pointer-wrapper" style="position:absolute; top:0; right:0; display:none; flex-direction:column; align-items:center; z-index:10; transition: right 0.4s ease;">
+        <div style="font-size:14px; color:#2ecc71; font-weight:600; margin-bottom:4px;">rear</div>
+        <div style="width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-top:12px solid #2ecc71;"></div>
+      </div>
+      
+      <!-- 队列元素容器 -->
+      <div id="queue-elements" style="display:flex; align-items:center; gap:8px; width:100%; min-height:150px; padding:40px 60px; position:relative;">
+        <!-- 队列元素将在这里动态生成 -->
+      </div>
+      
+      <!-- Front 和 Rear 标签 -->
+      <div style="display:flex; justify-content:space-between; width:100%; padding:0 60px; margin-top:8px;">
+        <div style="font-size:12px; color:var(--muted); font-weight:600;">Front（队头）</div>
+        <div style="font-size:12px; color:var(--muted); font-weight:600;">Rear（队尾）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="display:flex; gap:10px; flex-wrap:wrap;">
+    <button class="btn" id="enqueue-btn">➡ Enqueue（入队）</button>
+    <button class="btn" id="dequeue-btn">⬅ Dequeue（出队）</button>
+    <button class="btn" id="reset-btn">🔄 重置</button>
+    <button class="btn" id="complete-btn">完成并记分</button>
+  </div>
+
+  <div class="card">
+    <h3>伪代码</h3>
+    <div id="pseudocode" style="background:#f8f9fa; padding:12px; border-radius:6px; font-family:'Courier New', monospace; font-size:13px; line-height:1.8;">
+      <div id="code-line-0" class="code-line">// 等待操作...</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>微任务（小测验）</h3>
+    <p class="small">队列的 Enqueue 和 Dequeue 操作的时间复杂度是多少？</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn quiz-btn" data-answer="O(1)">O(1)</button>
+      <button class="btn quiz-btn" data-answer="O(n)">O(n)</button>
+      <button class="btn quiz-btn" data-answer="O(log n)">O(log n)</button>
+    </div>
+    <p id="quiz-result" class="small" style="margin-top:12px"></p>
+  </div>
+{% endblock %}
+
+{% block right_panel %}
+  <h3>🤖 AI 辅助</h3>
+  <div style="display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+    <button class="btn" id="ai-hint-btn">💡 请求提示</button>
+    <button class="btn" id="ai-explain-btn">📘 请求解释</button>
+  </div>
+  <div id="ai-output" style="margin-top:8px">AI 输出将在这里展示</div>
+
+  <hr style="margin:12px 0">
+
+  <div>
+    <div class="small">积分</div>
+    <div style="font-size:20px; margin-top:6px"><span id="score-display">0</span> 分</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="small">进度</div>
+    <div style="margin-top:8px" class="progress"><div class="progress-inner"></div></div>
+    <div id="progress-percent" class="small" style="margin-top:6px">0%</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="small">徽章</div>
+    <div id="badges-list" style="margin-top:8px"></div>
+  </div>
+
+  <div style="margin-top:12px">
+    <button class="btn" onclick="exportLogs()">导出日志</button>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="/static/js/queue.js"></script>
+{% endblock %}

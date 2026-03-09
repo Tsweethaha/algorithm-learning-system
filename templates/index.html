@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}AI 可视化算法学习平台 - 首页{% endblock %}
+
+{% block left_panel %}
+  <div class="card">
+    <h1>AI 可视化算法学习平台</h1>
+    <p class="small">本平台整合生成式 AI 与互动可视化，覆盖大学数据结构核心算法模块。请选择左侧算法开始学习。</p>
+  </div>
+
+  <div class="card">
+    <h3>快速说明</h3>
+    <ul>
+      <li>每个算法为独立页面：理论 → 动画 → 小测 → AI 提示</li>
+      <li>完成页面后点击“完成并记分”将记录进度，进度保存在浏览器（localStorage）</li>
+      <li>无需账号，实验时请确保使用统一设备/浏览器以便记录</li>
+    </ul>
+    <button class="btn" onclick="exportLogs()">导出日志</button>
+  </div>
+{% endblock %}
